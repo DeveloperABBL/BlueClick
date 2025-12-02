@@ -5,8 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticleController;
 
 Route::post('/', [AuthController::class, 'login'])->name('login.post');
-Route::get('/', function () { return view('auth.login'); })->name('login');
-Route::get('/สมัครสมาชิก', function () { return view('auth.register'); })->name('register');
+Route::get('/', function () { return view('public.login'); })->name('login');
+Route::get('/สมัครสมาชิก', function () { return view('public.register'); })->name('register');
 Route::post('/สมัครสมาชิก', [AuthController::class, 'register'])->name('signup');
 Route::get('/ลืมรหัสผ่าน', function () { return view('auth.forgotPassword'); })->name('forgotPassword');
 Route::get('/ตั้งรหัสผ่านใหม่', function () { return view('auth.setPassword'); })->name('setPassword');
