@@ -1,0 +1,100 @@
+/*
+Template Name: Velzon - Admin & Dashboard Template
+Author: Themesbrand
+Website: https://themesbrand.com/
+Contact: support@themesbrand.com
+File: Custom Css File
+*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*,
+body {
+    font-family: 'Prompt', sans-serif !important;
+}
+
+.app-search .select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 40px;
+}
+
+.select2-container .select2-selection--single {
+    height: 37.5px;
+    border-color: #ced4da !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 35px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 6px;
+}
+
+.initial {
+    background-color: #cfcfcf;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: inline-block;
+    font-family: "Poppins", sans-serif;
+    font-size: 9.75px;
+    font-weight: 600;
+    line-height: 9.2625px;
+    overflow-wrap: break-word;
+    padding: 4px 6px;
+    text-align: center;
+    text-size-adjust: 100%;
+    white-space-collapse: collapse;
+    min-width: 60px;
+}
+
+.initial.very-low {
+    background-color: #00e05d;
+    /* เขียวเข้ม */
+    color: #ffffff;
+}
+
+.initial.low {
+    background-color: #60d990;
+    /* เขียวอ่อน */
+    color: #ffffff;
+}
+
+.initial.moderate {
+    background-color: #f4d03f;
+    /* เหลือง */
+    color: #ffffff;
+}
+
+.initial.high {
+    background-color: #e67e22;
+    /* ส้มเข้ม */
+    color: #ffffff;
+}
+
+.initial.very-high {
+    background-color: #e74c3c;
+    /* แดง */
+    color: #ffffff;
+}
+
+.navbar-menu .navbar-nav .nav-sm .nav-link:hover,
+.navbar-menu .navbar-nav .nav-sm .nav-link.active,
+.navbar-menu .navbar-nav .nav-link:hover,
+.navbar-menu .navbar-nav .nav-link.active,
+.navbar-menu .navbar-nav .nav-link[data-bs-toggle=collapse][aria-expanded=true] {
+    color: #036839;
+}
+
+.ms-choice {
+    border-color: #ced4da !important;
+    height: 37.5px !important;
+}
+
+.ms-choice>span {
+    position: relative !important;
+}
