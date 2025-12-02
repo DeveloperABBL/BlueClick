@@ -1,23 +1,27 @@
 @extends('layouts.auth')
 @section('content')
-<h1 class="text text-center py-2">ลงทะเบียนผู้ใช้งานระบบ</h1>
+<div class="mb-5 text-white-50 text-center">
+    <h1 class="dislay-5 coming-soon-text">ลงทะเบียนผู้ใช้งานระบบ</h1>
+</div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card overflow-hidden card-bg-fill galaxy-border-none">
                 <form id="mangaForm" method="POST" action="/author/insert">
                     @csrf
                     <div id="formUser">
-                        <div class="card">
+                        
                             <div class="card-header border-bottom">
                                 <h4 class="card-title mb-0 mt-2">
                                     ข้อมูลผู้ติดต่อ
                                 </h4>
+                                <hr>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-2 px-2">
                                             <div class="mb-3">
                                                 <label for="prefix" class="form-label">
-                                                    คำนำหน้าชื่อ<span class="text text-danger">*
+                                                    คำนำหน้าชื่อ<span class="text text-danger"> *
                                                     </span>
                                                 </label>
                                                 <input type="text" name="prefix" class="form-control"
@@ -27,7 +31,7 @@
                                         <div class="col-lg-5 px-2">
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">
-                                                    ชื่อจริง<span class="text text-danger">*</span>
+                                                    ชื่อจริง<span class="text text-danger"> *</span>
                                                 </label>
                                                 <input type="text" name="firstname" class="form-control"
                                                     placeholder="กรอกชื่อจริง">
@@ -36,7 +40,7 @@
                                         <div class="col-lg-5 px-2">
                                             <div class="mb-3">
                                                 <label for="surname" class="form-label">
-                                                    นามสกุล<span class="text text-danger">*</span>
+                                                    นามสกุล<span class="text text-danger"> *</span>
                                                 </label>
                                                 <input type="text" name="surname" class="form-control"
                                                     placeholder="กรอกนามสกุล">
@@ -46,7 +50,7 @@
                                         <div class="col-lg-6 px-2">
                                             <div class="mb-3">
                                                 <label for="tax_no" class="form-label">
-                                                    เลขประจำตัวผู้เสียภาษี<span class="text text-danger">*</span>
+                                                    เลขประจำตัวผู้เสียภาษี<span class="text text-danger"> *</span>
                                                 </label>
                                                 <input type="text" name="tax_no" class="form-control"
                                                     placeholder="ป้อนหมายเลขโทรศัพท์">
@@ -65,7 +69,7 @@
                                         <div class="col-lg-6 px-2">
                                             <div class="mb-3">
                                                 <label for="tal_no" class="form-label">
-                                                    เบอร์โทรศัพท์<span class="text text-danger">*</span>
+                                                    เบอร์โทรศัพท์<span class="text text-danger"> *</span>
                                                 </label>
                                                 <input type="text" name="tal_no" class="form-control"
                                                     placeholder="ป้อนหมายเลขโทรศัพท์">
@@ -74,7 +78,7 @@
                                         <div class="col-lg-6 px-2">
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">
-                                                    Email<span class="text text-danger">*</span>
+                                                    Email<span class="text text-danger"> *</span>
                                                 </label>
                                                 <input type="text" name="email" class="form-control"
                                                     placeholder="Email">
@@ -83,7 +87,7 @@
                                         <div class="col-lg-6 px-2">
                                             <div class="mb-3">
                                                 <label for="address1" class="form-label">
-                                                    ที่อยู่ เลขที่<span class="text text-danger">*</span>
+                                                    ที่อยู่ เลขที่<span class="text text-danger"> *</span>
                                                 </label>
                                                 <input type="text" name="address1" class="form-control"
                                                     placeholder="ที่อยู่ เลขที่">
@@ -92,7 +96,7 @@
                                         <div class="col-lg-6 px-2">
                                             <div class="mb-3">
                                                 <label for="address2" class="form-label">
-                                                    ตำบล อำเภอ จังหวัด รหัสไปษณีย์<span class="text text-danger">*</span>
+                                                    ตำบล อำเภอ จังหวัด รหัสไปษณีย์<span class="text text-danger"> *</span>
                                                 </label>
                                                 <input type="text" name="address2" class="form-control"
                                                     placeholder="ตำบล อำเภอ จังหวัด รหัสไปษณีย์">
@@ -101,7 +105,7 @@
                                         <div class="col-lg-12 px-2">
                                             <div class="mb-3">
                                                 <label for="address2" class="form-label">
-                                                    ประเภทการลงทะเบียน<span class="text text-danger">*</span>
+                                                    ประเภทการลงทะเบียน<span class="text text-danger"> *</span>
                                                 </label>
                                                 <div class="mb-3 d-flex align-items-center gap-4">
                                                     <div class="form-check">
