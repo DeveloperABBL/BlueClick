@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('public.login');
 })->name('login');
 
 Route::get('/สมัครสมาชิก', function () {
-    return view('auth.register');
+    return view('public.register');
 })->name('register');
 
 Route::get('/ลืมรหัสผ่าน', function () {
