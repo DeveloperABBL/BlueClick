@@ -1,0 +1,708 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body {
+  background: rgb(204, 204, 204);
+  font-family: 'Sarabun', sans-serif !important;
+  padding: 12px;
+  font-weight: 400;
+  line-height: 2;
+  font-size: 10pt;
+}
+
+b {
+  font-weight: 600;
+}
+
+.header-detail1 {
+  width: 160px;
+  display: inline-block;
+}
+
+.header-detail2 {
+  width: 220px;
+  display: inline-block;
+}
+
+.table-bordered>:not(caption)>* {
+  border-width: 1px;
+  border-color: black;
+}
+
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  /* box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5); */
+  padding: .4in .5in;
+  position: relative;
+}
+
+page[size="A4"] {
+  /* width: 21cm;
+  height: 29.7cm; */
+
+  /* width: 1100px;
+  height: 1697px; */
+
+  width: 210mm;
+  min-height: 297mm;
+}
+
+
+page[size="A4"][layout="landscape"] {
+  width: 29.7cm;
+  height: 21cm;
+}
+
+page[size="A3"] {
+  width: 29.7cm;
+  height: 42cm;
+}
+
+page[size="A3"][layout="landscape"] {
+  width: 42cm;
+  height: 29.7cm;
+}
+
+page[size="A5"] {
+  width: 14.8cm;
+  height: 21cm;
+}
+
+page[size="A5"][layout="landscape"] {
+  width: 21cm;
+  height: 14.8cm;
+}
+
+@media print {
+
+  body>*:not(page) {
+    display: none;
+  }
+
+  body {
+    font-size: 10pt;
+    background-color: white;
+  }
+
+  page {
+    margin: 0 auto;
+    box-shadow: 0;
+    padding: 0;
+    page-break-after: always;
+    overflow: hidden;
+    width: 210mm;
+    /* height: 297mm; */
+  }
+
+  .content {
+    width: 100%;
+    padding: 15mm;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 10mm;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    /* padding: 5px; */
+    border: 1px solid #C9C9C9;
+    text-align: left;
+    vertical-align: top;
+  }
+}
+
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: .4in .5in;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: .4in .5in;
+}
+
+.dot {
+  border-bottom: 1px dotted rgb(66, 66, 66);
+  display: inline-block;
+  padding: 0 12px;
+  position: relative;
+}
+
+.dot::after {
+  content: "";
+  display: inline-block;
+}
+
+.dot .signature {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  width: 90%;
+}
+
+.box-staff {
+  width: 60px;
+  display: inline-block;
+  position: relative;
+}
+
+.box-staff::after {
+  content: ':';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.image-copy {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+.table-list th,
+.table-list td {
+  height: 30px;
+  font-size: inherit;
+  padding: 0px 4px;
+  border: 1px solid #000;
+}
+
+.fs-0 {
+  font-size: 0 !important;
+}
+
+.fs-9 {
+  font-size: 9px !important;
+}
+
+.fs-10 {
+  font-size: 10px !important;
+}
+
+.fs-11 {
+  font-size: 11px !important;
+}
+
+.fs-12 {
+  font-size: 12px !important;
+}
+
+.fs-13 {
+  font-size: 13px !important;
+}
+
+.fs-14 {
+  font-size: 14px !important;
+}
+
+.fs-15 {
+  font-size: 15px !important;
+}
+
+.fs-16 {
+  font-size: 16px !important;
+}
+
+.fs-17 {
+  font-size: 17px !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
+}
+
+.fs-19 {
+  font-size: 19px !important;
+}
+
+.fs-20 {
+  font-size: 20px !important;
+}
+
+.fs-22 {
+  font-size: 22px !important;
+}
+
+.fs-24 {
+  font-size: 24px !important;
+}
+
+.fs-26 {
+  font-size: 26px !important;
+  line-height: 38px
+}
+
+.fs-28 {
+  font-size: 1.75rem !important;
+  line-height: 2.6rem
+}
+
+.fs-30 {
+  font-size: 1.875rem !important;
+  line-height: 2.8rem
+}
+
+.fs-32,
+.fs-40 {
+  line-height: 2.5rem
+}
+
+.fs-32 {
+  font-size: 2rem !important;
+}
+
+.fs-40 {
+  font-size: 2.5rem !important;
+}
+
+.fs-45 {
+  line-height: 3rem
+}
+
+.fs-50 {
+  font-size: 3.125rem !important;
+  line-height: 3.25rem
+}
+
+.fs-55 {
+  font-size: 3.438rem !important;
+  line-height: 3.5rem
+}
+
+.fs-60 {
+  font-size: 3.75rem !important;
+  line-height: 3.75rem
+}
+
+.fs-65 {
+  font-size: 4.063rem !important;
+  line-height: 4.688rem
+}
+
+.fs-70 {
+  font-size: 4.375rem !important;
+  line-height: 4.375rem
+}
+
+.fs-75 {
+  font-size: 4.668rem !important;
+  line-height: 4.668rem
+}
+
+.fs-80 {
+  font-size: 5rem !important;
+  line-height: 5rem
+}
+
+.fs-85 {
+  font-size: 5.313rem !important;
+  line-height: 5.313rem
+}
+
+.fs-90 {
+  font-size: 5.625rem !important;
+  line-height: 5.625rem
+}
+
+.fs-95 {
+  font-size: 5.938rem !important;
+  line-height: 5.938rem
+}
+
+.fs-100 {
+  font-size: 6.25rem !important;
+  line-height: 6.25rem
+}
+
+.fs-110 {
+  font-size: 6.875rem !important;
+  line-height: 6.875rem
+}
+
+.fs-120 {
+  font-size: 7.5rem !important;
+  line-height: 7.5rem
+}
+
+.fs-130 {
+  font-size: 8.125rem !important;
+  line-height: 8.125rem
+}
+
+.fs-140 {
+  font-size: 8.75rem !important;
+  line-height: 8.75rem
+}
+
+.fs-150 {
+  font-size: 9.375rem !important;
+  line-height: 9.375rem
+}
+
+.fs-160 {
+  font-size: 10rem !important;
+  line-height: 10rem
+}
+
+.fs-170 {
+  font-size: 10.625rem !important;
+  line-height: 10.625rem
+}
+
+.fs-180 {
+  font-size: 11.25rem !important;
+  line-height: 11.25rem
+}
+
+.fs-190 {
+  font-size: 11.875rem !important;
+  line-height: 11.875rem
+}
+
+.fs-200 {
+  font-size: 12.5rem !important;
+  line-height: 12.5rem
+}
+
+.fs-225 {
+  font-size: 14.063rem !important;
+  line-height: 14.063rem
+}
+
+.fs-250 {
+  font-size: 15.625rem !important;
+  line-height: 15.625rem
+}
+
+.fs-275 {
+  font-size: 17.188rem !important;
+  line-height: 17.188rem
+}
+
+.fs-300 {
+  font-size: 18.75rem !important;
+  line-height: 18.75rem
+}
+
+.fs-350 {
+  font-size: 21.875rem !important;
+  line-height: 21.875rem
+}
+
+.fs-400 {
+  font-size: 25rem !important;
+  line-height: 25rem
+}
+
+.lh-0px {
+  line-height: 0
+}
+
+.lh-10 {
+  line-height: 10px
+}
+
+.lh-11 {
+  line-height: 11px
+}
+
+.lh-12 {
+  line-height: 12px
+}
+
+.lh-13 {
+  line-height: 13px
+}
+
+.lh-14 {
+  line-height: 14px
+}
+
+.lh-15 {
+  line-height: 15px
+}
+
+.lh-16 {
+  line-height: 16px
+}
+
+.lh-18 {
+  line-height: 18px
+}
+
+.lh-19 {
+  line-height: 19px
+}
+
+.lh-20 {
+  line-height: 20px
+}
+
+.lh-22 {
+  line-height: 22px
+}
+
+.lh-24 {
+  line-height: 24px
+}
+
+.lh-26 {
+  line-height: 26px
+}
+
+.lh-28 {
+  line-height: 28px
+}
+
+.lh-30 {
+  line-height: 30px
+}
+
+.lh-32 {
+  line-height: 2rem
+}
+
+.lh-34 {
+  line-height: 2.125rem
+}
+
+.lh-36 {
+  line-height: 2.25rem
+}
+
+.lh-38 {
+  line-height: 2.375rem
+}
+
+.lh-40 {
+  line-height: 2.5rem
+}
+
+.lh-42 {
+  line-height: 2.625rem
+}
+
+.lh-44 {
+  line-height: 2.75rem
+}
+
+.lh-46 {
+  line-height: 2.875rem
+}
+
+.lh-48 {
+  line-height: 3rem
+}
+
+.lh-50 {
+  line-height: 3.125rem
+}
+
+.lh-55 {
+  line-height: 3.438rem
+}
+
+.lh-60 {
+  line-height: 3.75rem
+}
+
+.lh-65 {
+  line-height: 4.063rem
+}
+
+.lh-70 {
+  line-height: 4.375rem
+}
+
+.lh-75 {
+  line-height: 4.688rem
+}
+
+.lh-80 {
+  line-height: 5rem
+}
+
+.lh-85 {
+  line-height: 5.313rem
+}
+
+.lh-90 {
+  line-height: 5.625rem
+}
+
+.lh-95 {
+  line-height: 5.938rem
+}
+
+.lh-100 {
+  line-height: 6.25rem
+}
+
+.lh-105 {
+  line-height: 6.563rem
+}
+
+.lh-110 {
+  line-height: 6.875rem
+}
+
+.lh-115 {
+  line-height: 7.188rem
+}
+
+.lh-120 {
+  line-height: 7.5rem
+}
+
+.lh-0 {
+  line-height: 0
+}
+
+.lh-normal {
+  line-height: normal
+}
+
+.lh-initial {
+  line-height: initial
+}
+
+.lh-inherit {
+  line-height: inherit
+}
+
+.fw-100 {
+  font-weight: 100 !important
+}
+
+.fw-200 {
+  font-weight: 200 !important
+}
+
+.fw-300 {
+  font-weight: 300 !important
+}
+
+.fw-400 {
+  font-weight: 400 !important
+}
+
+.fw-500 {
+  font-weight: 500 !important
+}
+
+.fw-600 {
+  font-weight: 600 !important
+}
+
+.fw-700 {
+  font-weight: 700 !important
+}
+
+.fw-800 {
+  font-weight: 800 !important
+}
+
+.fw-900 {
+  font-weight: 900 !important
+}
+
+
+.report-general-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.report-general-table th,
+.report-general-table td {
+  border: 1px solid #C9C9C9;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.report-general-table thead th {
+  background-color: #7F7F7F;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+.report-general-table tbody tr:nth-child(odd) {
+  background-color: #e0e0e0;
+}
+
+
+.report-warning-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.report-warning-table th,
+.report-warning-table td {
+  border: 1px solid #C9C9C9;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.report-warning-table thead th {
+  background-color: #FFD966;
+  text-align: center;
+  font-weight: bold;
+}
+
+.report-warning-table tbody tr:nth-child(odd) {
+  background-color: #FFF2CC;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.chart-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Sarabun', sans-serif;
+}
+
+.chart-box h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.chart-box small {
+  font-size: 14px;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
