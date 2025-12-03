@@ -29,8 +29,13 @@
                                                 คำนำหน้าชื่อ<span class="text text-danger"> *
                                                 </span>
                                             </label>
-                                            <input type="text" name="prefix" class="form-control"
-                                                placeholder="กรอกคำนำหน้า">
+                                            <select name="prefix" class="form-select">
+                                                <option value="">เลือกคำนำหน้าชื่อ</option>
+                                                <option value="นาย">นาย</option>
+                                                <option value="นาง">นาง</option>
+                                                <option value="นางสาว">นางสาว</option>
+                                                <option value="อื่นๆ">อื่นๆ</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 px-2">
@@ -106,7 +111,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label">ประเภทการลงทะเบียน *</label>
+                                        <label class="form-label">ประเภทการลงทะเบียน</label>
+                                        <span class="text text-danger"> *</span>
                                         <div class="d-flex gap-4 mt-1">
 
                                             <div class="form-check">
@@ -132,7 +138,8 @@
                                     <!-- ฟิลด์บัญชีธนาคาร (เฉพาะพนักงาน) -->
                                     <div id="employee_bank_section" class="row" style="display:none;">
                                         <div class="col-md-4 mb-3">
-                                            <label class="form-label">บัญชีธนาคาร (สำหรับรับเงินเดือน) *</label>
+                                            <label class="form-label">บัญชีธนาคาร (สำหรับรับเงินเดือน)</label>
+                                            <span class="text text-danger"> *</span>
                                             <select class="form-select" name="bank_name">
                                                 <option value="">กรุณาเลือก</option>
                                                 <option value="1">กรุงเทพ จำกัด (มหาชน)</option>
@@ -172,13 +179,15 @@
                                         </div>
 
                                         <div class="col-md-4 mb-3">
-                                            <label class="form-label">ชื่อบัญชี *</label>
+                                            <label class="form-label">ชื่อบัญชี</label>
+                                            <span class="text text-danger"> *</span>
                                             <input type="text" class="form-control" name="bank_account_name"
                                                 placeholder="ชื่อบัญชี">
                                         </div>
 
                                         <div class="col-md-4 mb-3">
-                                            <label class="form-label">เลขที่บัญชี *</label>
+                                            <label class="form-label">เลขที่บัญชี</label>
+                                            <span class="text text-danger"> *</span>
                                             <input type="text" class="form-control" name="bank_account_number"
                                                 placeholder="เลขที่บัญชี">
                                         </div>

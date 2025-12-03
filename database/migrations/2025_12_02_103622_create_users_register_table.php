@@ -15,21 +15,23 @@ return new class extends Migration
             $table->id();
 
             // Contact Info
-            $table->string('prefix')->nullable();      // คำนำหน้า
-            $table->string('firstname');               // ชื่อจริง
-            $table->string('surname');                 // นามสกุล
-            $table->string('tax_no');                  // เลขผู้เสียภาษี
+            $table->string('prefix')->nullable();
+            $table->string('firstname');
+            $table->string('surname');
+            $table->string('tax_no');
+            $table->date('birthday')->nullable();
+            $table->string('tal_no');
+            $table->string('email')->unique();
+            $table->string('address1');
+            $table->string('address2');
 
-            $table->date('birthday')->nullable();      // วันเกิด
+            // Registration Type (แก้ไขให้ตรงกับฟอร์ม)
+            $table->enum('reg_type', ['employee', 'vendor', 'buyer']);
 
-            $table->string('tal_no');                  // เบอร์โทรศัพท์
-            $table->string('email')->unique();         // Email
-
-            $table->string('address1');                // ที่อยู่เลขที่
-            $table->string('address2');                // ตำบล อำเภอ จังหวัด รหัสไปรษณีย์
-
-            // user_group = employee, vender, buyer
-            $table->enum('user_group', ['employee', 'vender', 'buyer']);
+            // Bank Info (สำหรับพนักงาน)
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account_name')->nullable();
+            $table->string('bank_account_number')->nullable();
 
             $table->timestamps();
         });
