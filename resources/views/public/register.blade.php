@@ -29,8 +29,9 @@
                                                 คำนำหน้าชื่อ<span class="text text-danger"> *
                                                 </span>
                                             </label>
-                                            <select name="prefix" class="form-select">
-                                                <option value="">เลือกคำนำหน้าชื่อ</option>
+                                            <select name="prefix" id="prefix_select" class="form-select"
+                                                style="cursor: pointer;">
+                                                <option value="" disabled selected>เลือก</option>
                                                 <option value="นาย">นาย</option>
                                                 <option value="นาง">นาง</option>
                                                 <option value="นางสาว">นางสาว</option>
@@ -38,7 +39,16 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 px-2">
+                                    <div class="col-lg-2 px-2" id="prefix_other_field" style="display:none;">
+                                        <div class="mb-3">
+                                            <label for="prefix_other" class="form-label">
+                                                ระบุคำนำหน้า<span class="text text-danger"> *</span>
+                                            </label>
+                                            <input type="text" name="prefix_other" id="prefix_other_input"
+                                                class="form-control" placeholder="กรอกคำนำหน้า">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 px-2">
                                         <div class="mb-3">
                                             <label for="firstname" class="form-label">
                                                 ชื่อจริง<span class="text text-danger"> *</span>
@@ -47,7 +57,7 @@
                                                 placeholder="กรอกชื่อจริง">
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 px-2">
+                                    <div class="col-lg-4 px-2">
                                         <div class="mb-3">
                                             <label for="surname" class="form-label">
                                                 นามสกุล<span class="text text-danger"> *</span>
@@ -217,6 +227,22 @@
                 maxDate: "today"
             });
 
+            // จัดการการแสดง/ซ่อนช่องคำนำหน้าอื่นๆ
+            const prefixSelect = document.getElementById('prefix_select');
+            const prefixOtherField = document.getElementById('prefix_other_field');
+            const prefixOtherInput = document.getElementById('prefix_other_input');
+
+            prefixSelect.addEventListener('change', function() {
+                if (this.value === 'อื่นๆ') {
+                    prefixOtherField.style.display = 'block';
+                    prefixOtherInput.required = true;
+                } else {
+                    prefixOtherField.style.display = 'none';
+                    prefixOtherInput.required = false;
+                    prefixOtherInput.value = '';
+                }
+            });
+
             // จัดการการแสดง/ซ่อนส่วนของบัญชีธนาคาร
             const regTypeRadios = document.querySelectorAll('input[name="reg_type"]');
             const bankSection = document.getElementById('employee_bank_section');
@@ -232,4 +258,26 @@
             });
         });
     </script>
+
+    <style>
+        /* ปรับแต่ง select dropdown ให้สวยงาม */
+        .form-select {
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+            padding-right: 2.5rem;
+        }
+
+        .form-select option {
+            padding: 8px 12px;
+        }
+
+        .form-select option:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* ซ่อน option แรกหลังจากเลือกแล้ว */
+        .form-select:valid option[value=""] {
+            display: none;
+        }
+    </style>
 @endsection

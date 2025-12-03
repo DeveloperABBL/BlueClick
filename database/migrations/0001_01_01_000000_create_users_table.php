@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->enum('prefix', ['นาย', 'นาง', 'นางสาว', 'อื่นๆ'])->default('นาย')->comment('คำนำหน้าชื่อ');
+            $table->string('custom_prefix')->nullable()->comment('คำนำหน้าชื่อแบบกำหนดเอง ถ้าเลือก "อื่นๆ"');
+            $table->string('firstname')->comment('ชื่อจริง');
+            $table->string('surname')->comment('นามสกุล');
+            $table->string('tax_no')->comment('เลขประจำตัวผู้เสียภาษี');
+            $table->date('birthday')->nullable()->comment('วันเกิด');
+            $table->string('tal_no')->comment('เบอร์โทรศัพท์');
+            $table->string('email')->unique()->comment('Email');
             $table->rememberToken();
             $table->timestamps();
+            
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
