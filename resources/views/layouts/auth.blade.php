@@ -30,7 +30,7 @@
         <!-- end auth page content -->
 
         <!-- footer -->
-        <footer class="footer galaxy-border-none">
+        <footer class="bg-white py-3">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
