@@ -21,9 +21,13 @@ return new class extends Migration
             $table->date('birthday')->nullable()->comment('วันเกิด');
             $table->string('tal_no')->comment('เบอร์โทรศัพท์');
             $table->string('email')->unique()->comment('Email');
+            $table->enum('reg_type', ['employee', 'vendor', 'buyer']);
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account_name')->nullable();
+            $table->string('bank_account_number')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
