@@ -17,10 +17,13 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
+     protected $fillable = [
+        'user_register_id',
         'name',
         'email',
         'password',
+        'role',
+        'status',
     ];
 
     /**
@@ -44,5 +47,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * ความสัมพันธ์กับข้อมูลสมัครสมาชิก
+     * User → belongsTo → UserRegister
+     */
+    public function register()
+    {
+        return $this->belongsTo(UserRegister::class, 'user_register_id');
     }
 }

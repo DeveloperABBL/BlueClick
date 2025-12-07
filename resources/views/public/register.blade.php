@@ -2,6 +2,9 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold text-white">ลงทะเบียนผู้ใช้งานระบบ</h3>
+        </div>
         <div class="card overflow-hidden card-bg-fill galaxy-border-none">
             <div class="row g-0">
                 <div class="p-lg-5 p-4">
@@ -22,6 +25,53 @@
 
                     <form id="form_register" action="{{ route('signup') }}" method="POST">
                         @csrf
+                        <!-- ประเภทการลงทะเบียน -->
+                        <div class="mb-3">
+                            <label class="form-label d-block">ประเภทการลงทะเบียน *</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="employee" value="พนักงาน">
+                                <label class="form-check-label" for="employee">พนักงาน</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="partner_seller" value="คู่ค้าผู้ขาย">
+                                <label class="form-check-label" for="partner_seller">คู่ค้าผู้ขาย</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="partner_buyer" value="คู่ค้าผู้ซื้อ">
+                                <label class="form-check-label" for="partner_buyer">คู่ค้าผู้ซื้อ</label>
+                            </div>
+                        </div>
+                        <!-- ฟิลด์เฉพาะพนักงาน -->
+                        <div id="employee-fields" style="display: none;">
+
+                            <div class="row mt-3">
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="bank" class="form-label">บัญชีธนาคาร (สำหรับรับเงินเดือน) *</label>
+                                    <select class="form-control" id="bankSelect" name="bank">
+                                        <option value="">เลือกธนาคาร</option>
+                                        <option value="kbank">กสิกรไทย</option>
+                                        <option value="scb">ไทยพาณิชย์</option>
+                                        <option value="bbl">กรุงเทพ</option>
+                                        <option value="ktb">กรุงไทย</option>
+                                        <option value="tmb">ทหารไทยธนชาต</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="account_name" class="form-label">ชื่อบัญชี *</label>
+                                    <input type="text" id="account_name" name="account_name" class="form-control"
+                                        placeholder="กรอกชื่อบัญชี">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="account_number" class="form-label">เลขที่บัญชี *</label>
+                                    <input type="text" id="account_number" name="account_number" class="form-control"
+                                        placeholder="กรอกเลขที่บัญชี">
+                                </div>
+
+                            </div>
+
+                        </div>
                         <!-- คำนำหน้าชื่อ -->
                         <div class="mb-3">
                             <label for="prefix" class="form-label">คำนำหน้าชื่อ *</label>
@@ -80,24 +130,6 @@
                                 <input type="text" class="form-control" id="district" name="district" placeholder="ตำบล อำเภอ จังหวัด รหัสไปรษณีย์">
                             </div>
                         </div>
-
-                        <!-- ประเภทการลงทะเบียน -->
-                        <div class="mb-3">
-                            <label class="form-label d-block">ประเภทการลงทะเบียน *</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="employee" value="พนักงาน">
-                                <label class="form-check-label" for="employee">พนักงาน</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="partner_seller" value="คู่ค้าผู้ขาย">
-                                <label class="form-check-label" for="partner_seller">คู่ค้าผู้ขาย</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="partner_buyer" value="คู่ค้าผู้ซื้อ">
-                                <label class="form-check-label" for="partner_buyer">คู่ค้าผู้ซื้อ</label>
-                            </div>
-                        </div>
-
                         <div class="mt-4 text-end">
                             <button class="btn btn-success" type="submit">ถัดไป <i class="ri-arrow-right-line"></i></button>
                         </div>
@@ -114,6 +146,32 @@
     document.getElementById('prefix').addEventListener('change', function () {
         var otherPrefix = document.getElementById('other_prefix');
         otherPrefix.style.display = this.value === 'อื่นๆ' ? 'block' : 'none';
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+
+    const employeeRadio = document.getElementById('employee');
+    const sellerRadio = document.getElementById('partner_seller');
+    const buyerRadio = document.getElementById('partner_buyer');
+    const employeeFields = document.getElementById('employee-fields');
+
+    function toggleEmployeeFields() {
+        if (employeeRadio.checked) {
+            employeeFields.style.display = "block";
+        } else {
+            employeeFields.style.display = "none";
+        }
+    }
+
+    employeeRadio.addEventListener('change', toggleEmployeeFields);
+    sellerRadio.addEventListener('change', toggleEmployeeFields);
+    buyerRadio.addEventListener('change', toggleEmployeeFields);
+
+});
+    $(document).ready(function() {
+        $('#bankSelect').select2({
+            placeholder: "เลือกธนาคาร",
+            allowClear: true
+        });
     });
 </script>
 @endpush
