@@ -2,43 +2,65 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\AdminApprovalController;
+use App\Http\Controllers\SetPasswordController;
 
+/*
+|--------------------------------------------------------------------------
+| Public Routes (ยังไม่ล็อกอิน)
+|--------------------------------------------------------------------------
+*/
+
+// Login
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/', [AuthController::class, 'login'])->name('login.post');
-Route::get('/', function () { return view('public.login'); })->name('login');
-Route::get('/สมัครสมาชิก', function () { return view('public.register'); })->name('register');
-Route::post('/สมัครสมาชิก', [AuthController::class, 'register'])->name('signup');
-Route::get('/ลืมรหัสผ่าน', function () { return view('auth.forgotPassword'); })->name('forgotPassword');
-Route::get('/ตั้งรหัสผ่านใหม่', function () { return view('auth.setPassword'); })->name('setPassword');
+
+// Register
+Route::get('/สมัครสมาชิก', [RegisterController::class, 'showForm'])->name('register');
+Route::post('/สมัครสมาชิก', [RegisterController::class, 'register'])->name('signup');
+
+// Email verification
+Route::get('/verify-email/{token}', [VerificationController::class, 'verify'])
+    ->name('verify.email');
+
+// Set password (หลัง Admin อนุมัติ)
+// ใช้ ?token=xxxxx
+Route::get('/ตั้งรหัสผ่านใหม่', [SetPasswordController::class, 'showSetPasswordForm'])
+    ->name('password.setup.form');
+
+Route::post('/ตั้งรหัสผ่านใหม่', [SetPasswordController::class, 'setPassword'])
+    ->name('password.setup.save');
+
+// Forgot password (ยังไม่ใช้)
+Route::get('/ลืมรหัสผ่าน', fn() => view('auth.forgotPassword'))->name('forgotPassword');
 
 
-
-// สำหรับผู้ที่ล็อกอินแล้ว
+/*
+|--------------------------------------------------------------------------
+| Routes หลังล็อกอินแล้ว
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth')->group(function () {
 
-    Route::get('/empty', [ArticleController::class, 'index'])->name('empty');
-    Route::get('/Profile', function () { return view('app.profile.index'); })->name('profile.index');
-    Route::get('/Profile/edit', function () { return view('app.profile.edit'); })->name('profile.edit');
+    Route::get('/profile', fn() => view('app.profile.index'))->name('profile.index');
+    Route::get('/profile/edit', fn() => view('app.profile.edit'))->name('profile.edit');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    // หน้าเขียนบทความ
-    Route::get('/บทความ/สร้าง', [ArticleController::class, 'create'])->name('article.create');
-    // บันทึกบทความ
-    Route::post('/บทความ', [ArticleController::class, 'store'])->name('article.store');
-    Route::get('/บทความ', [ArticleController::class, 'index'])->name('article.index');
-    // แดงบทความ
-    Route::get('/บทความ/{id}', [ArticleController::class, 'show'])->name('article.show');
-    // ลบบทความ
-    Route::post('/บทความ/delete', [ArticleController::class, 'destroy'])->name('article.destroy');
-    // หน้าแก้ไข
-    Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit');
-    // อัปเดตบทความ
-    Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('article.update');
+});
 
 
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'admin'])->group(function () {
 
+    Route::get('/admin/approve-users', [AdminApprovalController::class, 'index'])
+        ->name('admin.users.waiting');
 
-    // สำหรับ admin เท่านั้น
-    Route::get('/รายชื่อผู้ใช้งานระบบ/แก้ไขข้อมูล', function () { return view('app.users.edit'); })
-        ->middleware('admin')
-        ->name('users.edit');
+    Route::post('/admin/approve-user/{id}', [AdminApprovalController::class, 'approve'])
+        ->name('admin.users.approve');
 });

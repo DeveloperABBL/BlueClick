@@ -12,29 +12,10 @@ class UserRegister extends Model
     protected $table = 'user_registers';
 
     protected $fillable = [
-        'prefix',
-        'first_name',
-        'last_name',
-        'birth_date',
-        'phone',
-        'email',
-
-        'address',
-        'province',
-        'district',
-        'subdistrict',
-        'zipcode',
-
-        'tax_id',
-        'register_type',
-
-        'bank_name',
-        'bank_account_name',
-        'bank_account_number',
-
-        'is_approved',
-        'approved_at',
-        'approved_by',
+        'prefix', 'other_prefix', 'first_name', 'last_name', 'tax_id',
+        'birthday', 'phone', 'email', 'address', 'district', 'type',
+        'bank', 'account_name', 'account_number',
+        'verification_token', 'is_verified',
     ];
 
     protected $casts = [

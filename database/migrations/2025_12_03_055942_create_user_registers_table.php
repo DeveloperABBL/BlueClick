@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('address', 255);
             $table->string('district', 255);
             $table->enum('type', ['พนักงาน','คู่ค้าผู้ขาย','คู่ค้าผู้ซื้อ']);
-            $table->string('bank', 50);
-            $table->string('account_name', 100);
-            $table->string('account_number', 50);
+            $table->string('bank', 50)->nullable();
+            $table->string('account_name', 100)->nullable();
+            $table->string('account_number', 50)->nullable();
             $table->timestamps();
         });
     }
