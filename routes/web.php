@@ -6,13 +6,14 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\SetPasswordController;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
 | Public Routes (ยังไม่ล็อกอิน)
 |--------------------------------------------------------------------------
 */
-
+Route::get('/หน้าแรก', [IndexController::class, 'showIndex'])->name('index');
 // Login
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/', [AuthController::class, 'login'])->name('login.post');
