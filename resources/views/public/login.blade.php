@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 @section('content')
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card overflow-hidden card-bg-fill galaxy-border-none">
                 <div class="row g-0">
@@ -43,9 +43,9 @@
 
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" 
-                                               class="form-control @error('email') is-invalid @enderror" 
-                                               id="email" 
+                                        <input type="email"
+                                               class="form-control @error('email') is-invalid @enderror"
+                                               id="email"
                                                name="email"
                                                value="{{ old('email') }}"
                                                placeholder="Enter email"
@@ -61,9 +61,9 @@
                                         </div>
                                         <label class="form-label" for="password">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" 
+                                            <input type="password"
                                                    class="form-control pe-5 password-input @error('password') is-invalid @enderror"
-                                                   placeholder="Enter password" 
+                                                   placeholder="Enter password"
                                                    id="password"
                                                    name="password"
                                                    required>
@@ -114,11 +114,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const passwordAddon = document.getElementById('password-addon');
             const passwordInput = document.querySelector('.password-input');
-            
+
             if (passwordAddon && passwordInput) {
                 passwordAddon.addEventListener('click', function() {
                     const icon = this.querySelector('i');
-                    
+
                     if (passwordInput.type === 'password') {
                         passwordInput.type = 'text';
                         icon.classList.remove('ri-eye-fill');
