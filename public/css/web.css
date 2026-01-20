@@ -1,0 +1,183 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+small,
+strong,
+a,
+button,
+ul,
+figure,
+li {
+    font-family: 'Prompt', sans-serif !important;
+    font-weight: 300;
+}
+
+.overflow-ellipsis {
+    white-space: nowrap;
+    width: 165px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bg-result-green {
+    background-color: #D4EDDA !important;
+    color: #0B2E13 !important;
+    font-weight: bold;
+}
+
+.bg-result-yellow {
+    background-color: #FEF3CD !important;
+    color: #533F03 !important;
+    font-weight: bold;
+}
+
+.bg-result-red {
+    background-color: #F8D7DA !important;
+    color: #491217 !important;
+    font-weight: bold;
+}
+
+.btn-line-button {
+    background: url("../../image/btn_base.png") no-repeat;
+    background-size: 30px;
+    background-color: #06C755;
+    color: white;
+    padding: 0px 0px 0px 0px;
+    font-weight: 400;
+    height: 34px;
+    font-size: 13px;
+    cursor: pointer;
+    border-style: solid;
+    border-color: #06C755;
+    border-radius: .25rem;
+}
+
+.btn-line-button:hover {
+    background: url("../../image/btn_hover.png") no-repeat;
+    background-size: 30px;
+    border-color: #05B34C;
+    background-color: #05B34C;
+}
+
+.btn-line-button:active {
+    background: url("../../image/btn_press.png") no-repeat;
+    background-size: 30px;
+    border-color: #048B3B;
+    background-color: #048B3B;
+}
+
+.btn-thaid-button {
+    background: url("../../image/thaid-logo.jpg") no-repeat;
+    background-size: 70px;
+    background-position-y: center;
+    background-color: #28258C;
+    color: white;
+    padding: 0px 0px 0px 0px;
+    font-weight: 400;
+    height: 34px;
+    font-size: 13px;
+    cursor: pointer;
+    border-style: solid;
+    border-color: #28258C;
+    border-radius: .25rem;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.main-pointer {
+    cursor: pointer;
+}
+
+.main-pointer:hover {
+    background-color: #1AB394;
+    color: white;
+}
+
+.main-pointer-active {
+    background-color: #1AB394;
+    color: white;
+}
+
+.border-navy {
+    border-radius: 0.25rem !important;
+    border-color: #1AB394 !important;
+}
+
+.badge-main-pointer {
+    z-index: 99;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: xx-small;
+    padding: 3px 8px;
+    border-radius: 50%;
+    background-color: #ED5565;
+    color: white;
+}
+
+.highcharts-title,
+.highcharts-axis-title,
+.highcharts-axis-labels,
+.highcharts-xaxis-labels,
+.highcharts-label,
+.highcharts-tooltip,
+.highcharts-legend,
+.highcharts-no-tooltip {
+    font-family: 'Prompt', sans-serif !important;
+}
+
+#btn-benefit {
+    position: fixed;
+    bottom: 35px;
+    right: 20px;
+    z-index: 1000;
+}
+.open-btn-benefit{
+    height: 60px;
+    width: 60px;
+    display: block;
+    background: #fff;
+    padding: 8px 7px 8px 12px;
+    text-align: center;
+    color: #000;
+    border-color: #1ab394;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50%;
+}
+.open-btn-benefit:hover {
+    color: white;
+    background: #1ab394;
+}
