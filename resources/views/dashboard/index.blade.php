@@ -7,7 +7,7 @@
     {{-- Header --}}
     <div class="dashboard-header">
         <h1>{{ auth()->user()->name ?? 'ผู้ใช้งาน' }}</h1>
-        <h2>{{ auth()->user()->}} ?? ไม่ทราบบริษัท</h2>
+        <h2>ไม่ทราบบริษัท</h2>
         <p>เลือกเมนูด้านล่างเพื่อเริ่มใช้งานระบบ BlueClick</p>
     </div>
 
@@ -74,7 +74,7 @@
     </div>
 @endsection
 
-@push('js')
+@push('script')
 <script>
 
 </script>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="utf-8" />
     <title>BlueClick | เลือกธุรกิจ</title>
@@ -8,6 +7,8 @@
     <meta content="BlueClick System" name="description" />
     <meta content="BlueClick" name="author" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="#">
     <style>
         * {
             margin: 0;
@@ -225,19 +226,17 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="main-card">
             <div class="card-header">
                 <h1>เลือกธุรกิจที่ต้องการเข้าใช้งาน</h1>
-                <p>กรุณาเลือกธุรกิจเพื่อเข้าสู่ระบบ OneClick</p>
             </div>
 
             <div class="card-body">
                 <div class="business-grid">
                     <!-- ธุรกิจ 1 -->
-                    <a href="{{ route('index') }}" class="business-card">
+                    <a href="{{ route('home') }}">
                         <div class="business-item">
                             <div class="icon-wrapper bg-primary">
                                 <i class="ri-building-2-fill"></i>

@@ -8,6 +8,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('index');
+        return view('dashboard.index');
+    }
+    public function selectcompany()
+    {
+         return view('welcome');
     }
 }

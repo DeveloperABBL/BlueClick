@@ -109,7 +109,6 @@
                     <span class="logo-lg">BlueClick</span>
                 </a>
 
-                <!-- TOGGLE (เหมือน Maxup) -->
                 <button type="button" class="p-0 btn btn-sm fs-20 header-item float-end btn-vertical-sm-hover"
                     id="vertical-hover">
                     <i class="ri-record-circle-line toggle-icon-line"></i>
@@ -146,11 +145,7 @@
     @stack('scripts')
 
     <script>
-        function logout() {
-            if (confirm('คุณต้องการออกจากระบบหรือไม่?')) {
-                window.location.href = '/logout';
-            }
-        }
+
     </script>
 
 </body>
