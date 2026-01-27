@@ -31,4 +31,24 @@ class UserController extends Controller
 
         return view('users.partials.pending', compact('pendings'));
     }
+    public function approve(User $user)
+    {
+        $user->update([
+            'status' => 'active',
+            'approve_datetime' => now(),
+            'approve_user_id' => auth()->id(),
+        ]);
+
+        return response()->json(['message' => 'อนุมัติเรียบร้อย']);
+    }
+
+    public function reject(User $user)
+    {
+        $user->update([
+            'status' => 'rejected',
+        ]);
+
+        return response()->json(['message' => 'ปฏิเสธเรียบร้อย']);
+    }
+
 }

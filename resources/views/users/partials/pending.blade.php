@@ -42,10 +42,11 @@
                                     {{ $user->created_at?->format('d/m/Y H:i') }}
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-success">
+                                    <button class="btn btn-sm btn-success btn-approve" data-id="{{ $user->id }}">
                                         อนุมัติ
                                     </button>
-                                    <button class="btn btn-sm btn-danger">
+
+                                    <button class="btn btn-sm btn-danger btn-reject" data-id="{{ $user->id }}">
                                         ปฏิเสธ
                                     </button>
                                 </td>
@@ -65,3 +66,99 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ================== APPROVE ==================
+            document.querySelectorAll('.btn-approve').forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    const userId = this.dataset.id;
+
+                    Swal.fire({
+                        title: 'ยืนยันการอนุมัติ',
+                        text: 'ต้องการอนุมัติผู้ใช้งานรายนี้หรือไม่?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'อนุมัติ',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: '#28a745',
+                        reverseButtons: true
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            sendAction(userId, 'approve');
+                        }
+                    });
+                });
+            });
+
+            // ================== REJECT ==================
+            document.querySelectorAll('.btn-reject').forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    const userId = this.dataset.id;
+
+                    Swal.fire({
+                        title: 'ปฏิเสธการสมัคร',
+                        text: 'คุณแน่ใจหรือไม่ว่าต้องการปฏิเสธ?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'ปฏิเสธ',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: '#dc3545',
+                        reverseButtons: true
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            sendAction(userId, 'reject');
+                        }
+                    });
+                });
+            });
+
+            // ================== AJAX FUNCTION ==================
+            function sendAction(userId, action) {
+
+                Swal.fire({
+                    title: 'กำลังดำเนินการ',
+                    text: 'กรุณารอสักครู่...',
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+
+                fetch(`/users/${userId}/${action}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(res => {
+                        if (!res.ok) throw res;
+                        return res.json();
+                    })
+                    .then(data => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'สำเร็จ',
+                            text: data.message ?? 'ดำเนินการเรียบร้อย',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            // ลบแถวออกจากตาราง
+                            const btn = document.querySelector(`[data-id="${userId}"]`);
+                            btn.closest('tr').remove();
+                        });
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'เกิดข้อผิดพลาด',
+                            text: 'ไม่สามารถดำเนินการได้'
+                        });
+                    });
+            }
+
+        });
+    </script>
+@endpush
