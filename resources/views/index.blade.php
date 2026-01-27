@@ -1,6 +1,6 @@
 @extends('layouts.office')
 
-@section('title', 'Dashboard')
+@section('title', 'หน้าแรก')
 @include('import.style')
 
 @section('content')

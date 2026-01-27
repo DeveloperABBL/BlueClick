@@ -10,21 +10,29 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email'    => ['required', 'email'],
-            'password' => ['required'],
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (
+            Auth::attempt([
+                'email' => $request->email,
+                'password' => $request->password,
+            ])
+        ) {
+
             $request->session()->regenerate();
 
-            // ✅ ล็อกอินแล้วไปเลือกบริษัท
-            return redirect()->route('select.company');
+            return response()->json([
+                'success' => true,
+                'redirect' => route('select.company'),
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
-        ])->onlyInput('email');
+        return response()->json([
+            'message' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+        ], 422);
     }
 
     public function logout(Request $request)

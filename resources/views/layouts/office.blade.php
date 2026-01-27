@@ -61,8 +61,7 @@
                         <div class="dropdown ms-sm-3 header-item topbar-user">
                             <button type="button" class="btn material-shadow-none" data-bs-toggle="dropdown">
                                 <span class="d-flex align-items-center">
-                                    <img class="rounded-circle header-profile-user"
-                                        src="#">
+                                    <img class="rounded-circle header-profile-user" src="#">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block fw-medium">
                                             {{ auth()->user()->email ?? 'user@blueclick.com' }}
@@ -79,9 +78,12 @@
                                     <i class="mdi mdi-account-circle me-1"></i> ข้อมูลส่วนตัว
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" onclick="logout()">
+                                <a class="dropdown-item" href="#" onclick="confirmLogout(event)">
                                     <i class="mdi mdi-logout me-1"></i> ออกจากระบบ
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -145,7 +147,24 @@
     @stack('scripts')
 
     <script>
+        function confirmLogout(e) {
+            e.preventDefault();
 
+            Swal.fire({
+                title: 'ออกจากระบบ?',
+                text: 'คุณต้องการออกจากระบบใช่หรือไม่',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ออกจากระบบ',
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#d33',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        }
     </script>
 
 </body>

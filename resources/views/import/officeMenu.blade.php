@@ -3,7 +3,7 @@
     <li class="menu-title"><span data-key="t-menu">เมนูหลัก</span></li>
 
     <li class="nav-item">
-        <a class="nav-link menu-link active" href="#">
+        <a class="nav-link menu-link active" href="{{ route('home') }}">
             <i class="ri-home-2-line"></i> <span data-key="t-homes">หน้าแรก</span>
         </a>
     </li>
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('companies.pending') }}" class="nav-link">
+                    <a href="{{ route('users.pending') }}" class="nav-link">
                         รายการรออนุมัติ
                     </a>
                 </li>

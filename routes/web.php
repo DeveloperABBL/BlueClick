@@ -36,12 +36,9 @@ Route::post('/logout', [LoginController::class, 'logout'])
 | Register
 |--------------------------------------------------------------------------
 */
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+Route::get('/register', function () {return view('auth.register');})->name('register');
 
-Route::post('/register-user', [RegisterController::class, 'store'])
-    ->name('registerUser');
+Route::post('/register-user', [RegisterController::class, 'store'])->name('registerUser');
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +47,27 @@ Route::post('/register-user', [RegisterController::class, 'store'])
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/select-company',[HomeController::class, 'selectcompany'])->name('select.company');
+    // เลือกบริษัทหลัง Login
+    Route::get('/select-company', [HomeController::class, 'selectcompany'])->name('select.company');
 
+    // หน้าแรก
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    // ผู้ใช้งานระบบ (อนุมัติแล้ว)
+    Route::get('/users', [UserController::class, 'index'])
+        ->name('users.index');
 
-    Route::get('/companies/pending', [CompanyController::class, 'pending'])->name('companies.pending');
+    // รายการรออนุมัติ
+    Route::get('/users/pending', [UserController::class, 'pending'])
+        ->name('users.pending');
 
-    Route::post('/companies/{id}/approve', [CompanyController::class, 'approve'])->name('companies.approve');
+    // อนุมัติผู้ใช้
+    Route::post('/users/{user}/approve', [UserController::class, 'approve'])
+        ->name('users.approve');
+
+    // ปฏิเสธผู้ใช้
+    Route::post('/users/{user}/reject', [UserController::class, 'reject'])
+        ->name('users.reject');
 });
+
 

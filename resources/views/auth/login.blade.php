@@ -1,46 +1,23 @@
 @extends('layouts.app')
 
 @section('title', 'เข้าสู่ระบบ')
-@section('subtitle', 'ระบบบริหารจัดการ BlueClick')
-
+@section('subtitle', 'BlueClick')
+@include('import.script')
 @section('content')
-<div class="auth-card card">
+<div class="auth-card card shadow-sm">
     <div class="card-body">
 
-        <form method="POST" action="{{ route('login') }}">
+        <form id="loginForm">
             @csrf
 
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email"
-                       name="email"
-                       class="form-control @error('email') is-invalid @enderror"
-                       value="{{ old('email') }}"
-                       placeholder="example@blueclick.com"
-                       required
-                       autofocus>
-                @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                <input type="text" name="email" class="form-control">
             </div>
 
             <div class="mb-4">
                 <label class="form-label">รหัสผ่าน</label>
-                <input type="password"
-                       name="password"
-                       class="form-control @error('password') is-invalid @enderror"
-                       placeholder="••••••••"
-                       required>
-                @error('password')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                <label class="form-check-label" for="remember">
-                    จดจำการเข้าสู่ระบบ
-                </label>
+                <input type="password" name="password" class="form-control">
             </div>
 
             <button type="submit" class="btn btn-primary w-100 mb-3">
@@ -52,9 +29,68 @@
                 <span class="text-muted">|</span>
                 <a href="{{ route('register') }}" class="auth-link ms-3">สมัครใช้งาน</a>
             </div>
-
         </form>
 
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    Swal.fire({
+        title: 'กำลังเข้าสู่ระบบ',
+        text: 'กรุณารอสักครู่...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    try {
+        const response = await fetch("{{ route('login') }}", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw data;
+        }
+
+        Swal.fire({
+            icon: 'success',
+            title: 'สำเร็จ',
+            text: 'เข้าสู่ระบบเรียบร้อย',
+            timer: 1500,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = data.redirect ?? "{{ route('select.company') }}";
+        });
+
+    } catch (error) {
+        let message = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+
+        if (error?.errors) {
+            message = Object.values(error.errors)[0][0];
+        }
+
+        Swal.fire({
+            icon: 'error',
+            title: 'เข้าสู่ระบบไม่สำเร็จ',
+            text: message
+        });
+    }
+});
+</script>
+@endpush

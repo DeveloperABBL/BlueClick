@@ -2,40 +2,49 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-    protected $fillable = [
-        'email',
-        'password',
-        'prefix',
-        'custom_prefix',
-        'firstname',
-        'lastname',
-        'birth_date',
-        'company_id',
-    ];
+    use HasFactory, Notifiable, SoftDeletes;
 
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
+    protected $fillable = [
+        'approve_user_id',
+        'prefix',
+        'other_prefix',
+        'first_name',
+        'last_name',
+        'phone_no',
+        'email',
+        'profile_image',
+        'password',
+        'role',
+        'status',
+        'approve_datetime',
+        'email_verified_at',
+    ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'approve_datetime' => 'datetime',
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    public function approveUser()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(User::class, 'approve_user_id');
     }
 }

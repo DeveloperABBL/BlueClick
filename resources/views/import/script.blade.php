@@ -20,7 +20,7 @@
 <script src="{{ asset('assets/libs/cleave.js/cleave.min.js') }}"></script>
 <script src="{{ asset('assets/libs/quill/quill.min.js') }}"></script>
 <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{-- <script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script> --}}
 <!-- ✅ DataTables -->
 <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>

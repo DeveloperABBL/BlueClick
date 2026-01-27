@@ -1,13 +1,13 @@
 @extends('layouts.office')
 
-@section('title', 'ผู้ใช้งานระบบ')
+@section('title', 'รายการรออนุมัติบริษัท')
 
 @section('content')
 
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0">ผู้ใช้งานระบบ</h4>
+                <h4 class="mb-0">รายการรออนุมัติ</h4>
             </div>
         </div>
     </div>
@@ -20,16 +20,15 @@
                     <thead class="table-light">
                         <tr>
                             <th>#</th>
-                            <th>ชื่อ - นามสกุล</th>
+                            <th>ชื่อผู้สมัคร</th>
                             <th>Email</th>
                             <th>เบอร์โทร</th>
-                            <th>สิทธิ์</th>
-                            <th>สถานะ</th>
-                            <th width="120">จัดการ</th>
+                            <th>วันที่สมัคร</th>
+                            <th width="160">การอนุมัติ</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $key => $user)
+                        @forelse ($pendings as $key => $user)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
@@ -40,27 +39,21 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_no }}</td>
                                 <td>
-                                    <span class="badge bg-info">
-                                        {{ strtoupper($user->role) }}
-                                    </span>
+                                    {{ $user->created_at?->format('d/m/Y H:i') }}
                                 </td>
                                 <td>
-                                    @if ($user->status === 'active')
-                                        <span class="badge bg-success">ใช้งาน</span>
-                                    @else
-                                        <span class="badge bg-secondary">ระงับ</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        แก้ไข
+                                    <button class="btn btn-sm btn-success">
+                                        อนุมัติ
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                        ปฏิเสธ
                                     </button>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center text-muted">
-                                    ไม่พบข้อมูลผู้ใช้งาน
+                                <td colspan="6" class="text-center text-muted">
+                                    ไม่มีรายการรออนุมัติ
                                 </td>
                             </tr>
                         @endforelse

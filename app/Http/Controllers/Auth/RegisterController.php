@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,12 +14,12 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:users,email',
             'prefix' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'birth_date' => 'required|date',
-            'phone' => 'required',
+            'other_prefix' => 'nullable|string|max:10',
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'phone_no' => 'required|string|max:15|unique:users,phone_no',
+            'email' => 'required|email|max:100|unique:users,email',
             'password' => 'required|min:8|confirmed',
         ]);
 
@@ -28,36 +27,41 @@ class RegisterController extends Controller
 
         try {
 
-            // สร้างบริษัท (ยังไม่อนุมัติ)
-            $company = Company::create([
-                'phone' => $request->phone,
-                'approved_at' => null,
-            ]);
-
-            // สร้างผู้ใช้งาน
             User::create([
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
+                // ====== ข้อมูลพื้นฐาน ======
                 'prefix' => $request->prefix,
-                'custom_prefix' => $request->custom_prefix,
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
-                'birth_date' => $request->birth_date, // yyyy-mm-dd จาก input date
-                'company_id' => $company->id,
+                'other_prefix' => $request->prefix === 'อื่นๆ'
+                    ? $request->other_prefix
+                    : null,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone_no' => $request->phone_no,
+                'email' => $request->email,
+
+                // ====== ระบบ ======
+                'password' => Hash::make($request->password),
+                'role' => 'user',
+                'status' => 'register',
+                'approve_user_id' => null,
+                'approve_datetime' => null,
+                'email_verified_at' => null,
             ]);
 
             DB::commit();
 
             return redirect()
                 ->route('login')
-                ->with('success', 'สมัครสมาชิกสำเร็จ กรุณารอการอนุมัติจากระบบ');
+                ->with('success', 'สมัครสมาชิกสำเร็จ กรุณารอการอนุมัติจากผู้ดูแลระบบ');
 
         } catch (\Exception $e) {
+
             DB::rollBack();
 
-            return back()->withErrors([
-                'error' => 'เกิดข้อผิดพลาด: ' . $e->getMessage()
-            ])->withInput();
+            return back()
+                ->withErrors([
+                    'error' => 'เกิดข้อผิดพลาดในการสมัครสมาชิก'
+                ])
+                ->withInput();
         }
     }
 }
