@@ -3,6 +3,7 @@
 {{-- ============================================ --}}
 <!doctype html>
 <html lang="th">
+
 <head>
     <meta charset="utf-8">
     <title>@yield('title', 'BlueClick')</title>
@@ -178,26 +179,27 @@
 
 <body>
 
-<div class="auth-wrapper">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-9 col-sm-11">
+    <div class="auth-wrapper">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-8 col-xl-9 col-lg-10 col-md-11 col-sm-11">
 
-                {{-- LOGO --}}
-                <div class="auth-logo">
-                    <h2>BlueClick</h2>
-                    <p>@yield('subtitle')</p>
+                    {{-- LOGO --}}
+                    <div class="auth-logo">
+                        <h2>BlueClick</h2>
+                        <p>@yield('subtitle')</p>
+                    </div>
+
+                    {{-- CONTENT --}}
+                    @yield('content')
+
                 </div>
-
-                {{-- CONTENT --}}
-                @yield('content')
-
             </div>
         </div>
     </div>
-</div>
 
-<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-@stack('scripts')
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    @stack('scripts')
 </body>
+
 </html>

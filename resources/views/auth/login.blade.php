@@ -18,6 +18,7 @@
             <div class="mb-4">
                 <label class="form-label">รหัสผ่าน</label>
                 <input type="password" name="password" class="form-control">
+                <span class="password-toggle"><i class="ri-eye-fill align-middle"></i></span>
             </div>
 
             <button type="submit" class="btn btn-primary w-100 mb-3">

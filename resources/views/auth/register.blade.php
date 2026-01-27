@@ -2,7 +2,6 @@
 
 @section('title', 'สมัครเข้าใช้งานระบบ')
 @section('subtitle', 'ลงทะเบียนผู้ใช้งานระบบ')
-
 @section('content')
     <div class="auth-card card">
         <div class="card-body">
@@ -16,7 +15,8 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-4">
                         <label class="form-label">คำนำหน้า <span class="text-danger">*</span></label>
-                        <select name="prefix" class="form-select @error('prefix') is-invalid @enderror" required>
+                        <select name="prefix" id="prefixSelect" class="form-select @error('prefix') is-invalid @enderror"
+                            required>
                             <option value="">เลือก</option>
                             <option value="นาย" {{ old('prefix') == 'นาย' ? 'selected' : '' }}>นาย</option>
                             <option value="นาง" {{ old('prefix') == 'นาง' ? 'selected' : '' }}>นาง</option>
@@ -28,12 +28,12 @@
                         @enderror
                     </div>
 
-                    {{-- other_prefix (ใช้เฉพาะกรณีเลือก "อื่นๆ") --}}
-                    <div class="col-md-4">
-                        <label class="form-label">คำนำหน้าอื่น</label>
-                        <input type="text" name="other_prefix"
+                    {{-- other_prefix --}}
+                    <div class="col-md-4 d-none" id="otherPrefixWrapper">
+                        <label class="form-label">คำนำหน้าอื่น <span class="text-danger">*</span></label>
+                        <input type="text" name="other_prefix" id="otherPrefixInput"
                             class="form-control @error('other_prefix') is-invalid @enderror"
-                            value="{{ old('other_prefix') }}" placeholder="ระบุคำนำหน้า (ถ้ามี)">
+                            value="{{ old('other_prefix') }}" placeholder="ระบุคำนำหน้า">
                         @error('other_prefix')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -72,7 +72,7 @@
 
                 <div class="mb-4">
                     <label class="form-label">E-mail <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                    <input type="email" name="email" class="form-control w-50 @error('email') is-invalid @enderror"
                         value="{{ old('email') }}" placeholder="example@email.com" required>
                     @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -118,4 +118,81 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const prefixSelect = document.getElementById('prefixSelect');
+            const otherWrapper = document.getElementById('otherPrefixWrapper');
+            const otherInput = document.getElementById('otherPrefixInput');
+            const form = document.querySelector('form');
+
+            // ===== แสดง / ซ่อน คำนำหน้าอื่น =====
+            function toggleOtherPrefix() {
+                if (prefixSelect.value === 'อื่นๆ') {
+                    otherWrapper.classList.remove('d-none');
+                    otherInput.required = true;
+                } else {
+                    otherWrapper.classList.add('d-none');
+                    otherInput.required = false;
+                    otherInput.value = '';
+                }
+            }
+
+            toggleOtherPrefix();
+            prefixSelect.addEventListener('change', toggleOtherPrefix);
+
+            // ===== submit =====
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // 1️⃣ เช็คฟอร์มก่อน
+                if (!form.checkValidity()) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'กรอกข้อมูลไม่ครบ',
+                        text: 'กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน',
+                        confirmButtonText: 'ตกลง'
+                    });
+                    return;
+                }
+
+                // 2️⃣ ยืนยันการลงทะเบียน
+                Swal.fire({
+                    title: 'ยืนยันการลงทะเบียน',
+                    text: 'ตรวจสอบข้อมูลเรียบร้อยแล้วใช่หรือไม่?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                    reverseButtons: true,
+                    confirmButtonColor: '#2ecc71',
+                    cancelButtonColor: '#95a5a6'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        // submit ฟอร์มจริง
+                        form.submit();
+
+                        // 3️⃣ สำเร็จ + โหลด 3 วิ
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'ลงทะเบียนสำเร็จ',
+                            text: 'ระบบกำลังพากลับหน้าเข้าสู่ระบบ',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        }).then(() => {
+                            window.location.href = "{{ route('login') }}";
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
 @endpush
