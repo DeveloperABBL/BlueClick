@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserApprovedMail;
+
 use App\Models\User;
 
 class UserController extends Controller
@@ -33,13 +36,24 @@ class UserController extends Controller
     }
     public function approve(User $user)
     {
+        if ($user->status !== 'register') {
+            return response()->json([
+                'message' => 'สถานะไม่ถูกต้อง'
+            ], 422);
+        }
+
         $user->update([
             'status' => 'active',
             'approve_datetime' => now(),
             'approve_user_id' => auth()->id(),
         ]);
 
-        return response()->json(['message' => 'อนุมัติเรียบร้อย']);
+        // ส่งเมล
+        Mail::to($user->email)->send(new UserApprovedMail($user));
+
+        return response()->json([
+            'message' => 'อนุมัติเรียบร้อย และส่งอีเมลแล้ว'
+        ]);
     }
 
     public function reject(User $user)

@@ -15,7 +15,7 @@ class RegisterController extends Controller
     {
         $request->validate([
             'prefix' => 'required',
-            'other_prefix' => 'nullable|string|max:10',
+            'other_prefix' => 'required_if:prefix,อื่นๆ|string|max:10',
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'phone_no' => 'required|string|max:15|unique:users,phone_no',
