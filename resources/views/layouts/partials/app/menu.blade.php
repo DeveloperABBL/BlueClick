@@ -5,6 +5,9 @@
         <a class="nav-link menu-link @if (Route::is('index')) active @endif" href="{{ route('index') }}">
             <i class="ri-honour-line"></i> <span data-key="t-widgets">หน้าแรก</span>
         </a>
+        <a class="nav-link menu-link @if (Route::is('user_register.index')) active @endif" href="{{ route('user_register.index') }}">
+            <i class="ri-honour-line"></i> <span data-key="t-widgets">รายการลงทะเบียน</span>
+        </a>
     </li>
 
 </ul>

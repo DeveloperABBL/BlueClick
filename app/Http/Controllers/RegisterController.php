@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Models\UserRegister;
-
+ 
 class RegisterController extends Controller
 {
     // แสดงหน้า form สมัคร

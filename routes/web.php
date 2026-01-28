@@ -7,13 +7,15 @@ use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\SetPasswordController;
 use App\Http\Controllers\IndexController;
-
+use App\Http\Controllers\UserRegisterController;
 /*
 |--------------------------------------------------------------------------
 | Public Routes (ยังไม่ล็อกอิน)
 |--------------------------------------------------------------------------
 */
 Route::get('/หน้าแรก', [IndexController::class, 'showIndex'])->name('index');
+Route::get('/รายการลงทะเบียน', [UserRegisterController::class, 'index'])->name('user_register.index');
+Route::get('/รายการลงทะเบียน/{id}', [UserRegisterController::class, 'show'])->name('user_register.show');
 // Login
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/', [AuthController::class, 'login'])->name('login.post');
